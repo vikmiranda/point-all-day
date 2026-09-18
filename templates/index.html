@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boca a Boca — Tabacaria</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">BOCA A BOCA <span>• TABACARIA</span></div>
+  <button class="cart-button" id="openCart">
+    🛒 <b id="cartCount">0</b>
+  </button>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div>
+      <small>CATÁLOGO ONLINE</small>
+      <h1>Escolha. Monte.<br>Peça pelo WhatsApp.</h1>
+      <p>Selecione seus produtos e finalize o pedido direto no WhatsApp.</p>
+    </div>
+  </section>
+
+  <div class="categories" id="categories"></div>
+  <section id="catalog" class="product-grid"></section>
+</main>
+
+<div class="drawer hidden" id="cartDrawer">
+  <div class="overlay" id="closeCart"></div>
+  <aside class="cart-panel">
+    <div class="panel-head">
+      <h2>Meu pedido</h2>
+      <button class="icon-btn" id="closeCartBtn">×</button>
+    </div>
+    <div id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="total-row"><span>Subtotal</span><strong id="cartTotal">R$ 0,00</strong></div>
+      <button class="primary" id="checkoutBtn">FINALIZAR PEDIDO</button>
+    </div>
+  </aside>
+</div>
+
+<div class="modal hidden" id="checkoutModal">
+  <div class="modal-card">
+    <div class="panel-head">
+      <h2>Dados do pedido</h2>
+      <button class="icon-btn" id="closeCheckout">×</button>
+    </div>
+
+    <label>Primeiro nome</label>
+    <input id="firstName" type="text" placeholder="Ex.: João">
+
+    <label>Como você vai receber?</label>
+    <div class="choice-row">
+      <button class="choice active" data-method="retirada">Retirada</button>
+      <button class="choice" data-method="entrega">Entrega</button>
+    </div>
+
+    <div id="addressFields" class="hidden">
+      <label>Endereço</label>
+      <input id="address" type="text" placeholder="Rua / Avenida">
+
+      <div class="two-cols">
+        <div>
+          <label>Número</label>
+          <input id="number" type="text" placeholder="123">
+        </div>
+        <div>
+          <label>Bairro</label>
+          <input id="neighborhood" type="text" placeholder="Bairro">
+        </div>
+      </div>
+
+      <label>Complemento <span class="muted">(opcional)</span></label>
+      <input id="complement" type="text" placeholder="Casa, apto., referência...">
+    </div>
+
+    <div class="summary">
+      <div><span>Pedido</span><strong id="checkoutItemsCount">0 itens</strong></div>
+      <div><span>Total</span><strong id="checkoutTotal">R$ 0,00</strong></div>
+    </div>
+
+    <button class="primary" id="whatsappBtn">FINALIZAR NO WHATSAPP</button>
+    <p class="legal">O pedido será enviado ao atendimento pelo WhatsApp para confirmação.</p>
+  </div>
+</div>
+
+<script>
+  const PRODUCTS = {{ products | tojson }};
+</script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
